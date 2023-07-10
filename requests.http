@@ -1,0 +1,5 @@
+### All Books
+curl https://localhost:7002/books
+
+### Get Book by ID
+curl https://localhost:7002/book/1
