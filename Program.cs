@@ -81,7 +81,7 @@ app.MapGet(pattern: "/books", ([FromServices] List<Book> bookList, [FromServices
 .WithTags("Book Get Operations")
 .WithOpenApi();
 
-app.MapGet("/books/id/{id}", Results<Ok<Book>, NotFound> ([FromRoute] Guid id, [FromServices] List<Book> bookList, [FromServices] ILogger<Program> logger) =>
+app.MapGet("/books/id/{id:guid}", Results<Ok<Book>, NotFound> ([FromRoute] Guid id, [FromServices] List<Book> bookList, [FromServices] ILogger<Program> logger) =>
 {
     _logger?.LogInformation($"book by id endpoint is called. id is {id}");
 
@@ -152,7 +152,7 @@ app.MapPost("/book", Results<Created<Book>, BadRequest> ([FromBody] Book newBook
 .WithTags("Book Set Operations")
 .WithOpenApi();
 
-app.MapPut("/book/{id}", Results<Ok<Book>, NotFound, BadRequest> ([FromRoute] Guid id, [FromBody] Book updatedBook, [FromServices] List<Book> bookList, [FromServices] ILogger<Program> logger) =>
+app.MapPut("/book/{id:guid}", Results<Ok<Book>, NotFound, BadRequest> ([FromRoute] Guid id, [FromBody] Book updatedBook, [FromServices] List<Book> bookList, [FromServices] ILogger<Program> logger) =>
 {
     logger.LogInformation("Book update endpoint is called.");
 
@@ -180,7 +180,7 @@ app.MapPut("/book/{id}", Results<Ok<Book>, NotFound, BadRequest> ([FromRoute] Gu
 .WithTags("Book Set Operations")
 .WithOpenApi();
 
-app.MapDelete("/book/{id}", Results<Ok, NotFound> ([FromRoute] Guid id, [FromServices] List<Book> bookList, [FromServices] ILogger<Program> logger) =>
+app.MapDelete("/book/{id:guid}", Results<Ok, NotFound> ([FromRoute] Guid id, [FromServices] List<Book> bookList, [FromServices] ILogger<Program> logger) =>
 {
     logger.LogInformation("Book deletion endpoint is called.");
 
